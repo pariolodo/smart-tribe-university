@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Tribe University</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--green:#0B4A32;--green-2:#0E5F41;--gold:#D9C27E;--bg:#FAF8F2;--panel:#F1ECDD;--ink:#16261E;--muted:#4B5A52;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Source Sans 3',system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;margin:0}
+  a{color:var(--green)}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #E4DFD2}
+  nav .logo{font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:var(--green)}
+  nav a{text-decoration:none;font-weight:600;font-size:15px;margin-left:24px}
+  .hero{background:var(--green);color:var(--bg);padding:64px 24px}
+  .hero h1{font-size:clamp(28px,5vw,46px);line-height:1.15;color:var(--bg)}
+  .kicker{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
+  .hero p{max-width:560px;line-height:1.6;color:#E4E9E5}
+  .btn{display:inline-block;padding:13px 26px;border-radius:6px;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-size:15px}
+  .btn-gold{background:var(--gold);color:var(--ink)}
+  .btn-green{background:var(--green);color:var(--bg)}
+  .btn-outline{background:transparent;border:1px solid var(--gold);color:var(--bg)}
+  section{padding:56px 24px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media (max-width:800px){.grid{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid #E4DFD2;border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:12px}
+  .track-tag{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green-2)}
+  .course-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #EEE8D8;font-size:15px}
+  .course-row:last-child{border-bottom:none}
+  .lock{color:#8A9691;font-size:13px}
+  .unlocked a{font-weight:600}
+  .price{font-weight:700;color:var(--green)}
+  .how{background:var(--panel)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width:800px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--bg);border-radius:12px;padding:22px}
+  .cert{display:flex;gap:40px;align-items:center;flex-wrap:wrap}
+  .cert-card{flex:1;min-width:260px;background:var(--bg);border:2px solid var(--gold);border-radius:12px;padding:32px;text-align:center}
+  footer{background:var(--green);color:var(--bg);padding:48px 24px}
+  footer a{color:var(--gold);text-decoration:none;margin-right:32px}
+  /* Payment modal */
+  #payModal{display:none;position:fixed;inset:0;background:rgba(11,38,30,.6);z-index:50;align-items:center;justify-content:center;padding:16px}
+  #payModal.open{display:flex}
+  .modal-box{background:#fff;border-radius:14px;max-width:520px;width:100%;padding:32px;max-height:90vh;overflow:auto}
+  .modal-box h3{margin-bottom:6px}
+  .field{margin:14px 0}
+  .field label{font-size:13px;font-weight:600;display:block;margin-bottom:6px}
+  .field input{width:100%;padding:12px;border:1px solid #E4DFD2;border-radius:6px;font-size:15px}
+  .paymethods{display:flex;gap:12px;margin:18px 0}
+  .paymethods button{flex:1;padding:12px;border-radius:6px;border:1px solid #E4DFD2;background:#fff;font-weight:600;cursor:pointer}
+  .paymethods button.active{background:var(--green);color:#fff;border-color:var(--green)}
+  .bank-box{background:var(--panel);border-radius:10px;padding:16px;margin:12px 0;font-size:15px}
+  .bank-box div{display:flex;justify-content:space-between;padding:4px 0}
+  .close-x{float:right;cursor:pointer;font-size:20px;background:none;border:none}
+  .unlock-box{background:#EAF4EE;border:1px solid var(--green-2);border-radius:10px;padding:16px;margin-top:14px;font-size:14px}
+  .unlock-box a{font-weight:700}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Smart Tribe University</div>
+  <div>
+    <a href="#courses">Courses</a>
+    <a href="#how">How It Works</a>
+    <a href="#certificate">Certificate</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">Building A Computerized Tomorrow</div>
+    <h1>Tech &amp; digital skills, taught for Nigerians who want to earn from them</h1>
+    <p>Real training programs, real tasks, and a certificate at the end — priced so any young Nigerian, from age 15 up, can actually afford to start.</p>
+    <div style="margin-top:20px">
+      <a class="btn btn-gold" href="#courses">Browse Courses</a>
+      <a class="btn btn-outline" href="#contact">Talk to the CEO</a>
+    </div>
+  </div>
+</div>
+
+<section id="courses" class="wrap">
+  <h2 style="font-size:32px">Course tracks</h2>
+  <p style="color:var(--muted);max-width:600px">Two tracks — a 15-year-old just starting out, and an adult building a freelance career, both have a clear path. Every course link is a real, structured program that runs for weeks to months and ends in its own free certificate.</p>
+
+  <div class="grid" style="margin-top:24px">
+
+    <div class="card">
+      <div class="track-tag">Starter Track · Ages 15+</div>
+      <h3 style="font-size:22px">Digital Foundations</h3>
+      <div id="starter-list">
+        <div class="course-row" data-course="literacy" data-price="2500">
+          <span>Computer &amp; Internet Literacy</span>
+          <span class="price">₦2,500</span>
+        </div>
+        <div class="course-row" data-course="typing" data-price="2500">
+          <span>Typing &amp; Productivity Tools</span>
+          <span class="price">₦2,500</span>
+        </div>
+        <div class="course-row" data-course="python" data-price="5000">
+          <span>Intro to Coding (Python)</span>
+          <span class="price">₦5,000</span>
+        </div>
+        <div class="course-row" data-course="video" data-price="5000">
+          <span>Video Editing (DaVinci Resolve)</span>
+          <span class="price">₦5,000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="track-tag">Advanced Track · Freelance-Ready</div>
+      <h3 style="font-size:22px">Income Skills</h3>
+      <div id="advanced-list">
+        <div class="course-row" data-course="webdev" data-price="10000">
+          <span>Web Development (Responsive Design Cert)</span>
+          <span class="price">₦10,000</span>
+        </div>
+        <div class="course-row" data-course="itsupport" data-price="10000">
+          <span>IT Support &amp; Troubleshooting Diploma</span>
+          <span class="price">₦10,000</span>
+        </div>
+        <div class="course-row" data-course="design" data-price="7000">
+          <span>Graphic Design (Canva Design School)</span>
+          <span class="price">₦7,000</span>
+        </div>
+        <div class="course-row" data-course="marketing" data-price="15000">
+          <span>Digital Marketing &amp; Freelancing</span>
+          <span class="price">₦15,000</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="how" class="how">
+  <div class="wrap">
+    <h2 style="font-size:32px">How each course works</h2>
+    <div class="steps" style="margin-top:24px">
+      <div class="step"><div class="track-tag">STEP 1</div><h3 style="font-size:19px;margin:8px 0">Enroll &amp; pay</h3><p style="color:var(--muted);font-size:15px">Pick a course, pay by card or bank transfer.</p></div>
+      <div class="step"><div class="track-tag">STEP 2</div><h3 style="font-size:19px;margin:8px 0">Train &amp; complete tasks</h3><p style="color:var(--muted);font-size:15px">Work through the real training program and its own assessments.</p></div>
+      <div class="step"><div class="track-tag">STEP 3</div><h3 style="font-size:19px;margin:8px 0">Earn your certificate</h3><p style="color:var(--muted);font-size:15px">Issued by Smart Tribe University, signed by the CEO.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="certificate" class="wrap">
+  <div class="cert">
+    <div style="flex:1;min-width:260px">
+      <h2 style="font-size:32px">A certificate that means something</h2>
+      <p style="color:var(--muted);line-height:1.7">Every certificate is issued by Smart Tribe University itself and personally signed off by the CEO. It carries your name, the course, and the completion date.</p>
+    </div>
+    <div class="cert-card">
+      <div class="kicker">Certificate of Completion</div>
+      <h3 style="font-size:22px;margin-top:8px">Smart Tribe University</h3>
+      <p style="color:var(--muted);font-size:15px">This certifies that [Student Name] has completed [Course Name]</p>
+      <div style="margin-top:12px;font-weight:700">Hon. Omopariola Smart Oluwatoyin, B.Tech.</div>
+      <div style="font-size:13px;color:var(--muted)">Chief Executive Officer</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 style="color:var(--bg);font-size:28px">Questions or issues? Reach the CEO directly</h2>
+    <div style="margin-top:16px">
+      <a href="mailto:Omopariolasmartjethro@gmail.com">Omopariolasmartjethro@gmail.com</a>
+      <a href="https://wa.me/2348063543861">+234 806 354 3861 (WhatsApp)</a>
+    </div>
+    <div style="font-size:13px;color:#C8D3CC;margin-top:24px">© Smart Tribe University · Making the education world a better place.</div>
+  </div>
+</footer>
+
+<!-- PAYMENT MODAL -->
+<div id="payModal">
+  <div class="modal-box">
+    <button class="close-x" onclick="closeModal()">&times;</button>
+    <h3 id="modalCourseName">Enroll</h3>
+    <div id="modalPrice" class="price" style="font-size:22px"></div>
+
+    <div class="field">
+      <label>Full name</label>
+      <input id="payName" type="text" placeholder="Your full name">
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input id="payEmail" type="email" placeholder="you@example.com">
+    </div>
+
+    <div class="paymethods">
+      <button id="btnCard" class="active" onclick="showMethod('card')">Pay with Card</button>
+      <button id="btnBank" onclick="showMethod('bank')">Bank Transfer</button>
+    </div>
+
+    <div id="cardPane">
+      <button class="btn btn-green" style="width:100%" onclick="payWithPaystack()">Pay Now</button>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px">Secure checkout powered by Paystack (card, bank, USSD all supported).</p>
+    </div>
+
+    <div id="bankPane" style="display:none">
+      <div class="bank-box">
+        <div><span>Bank</span><strong>Opay</strong></div>
+        <div><span>Account Number</span><strong>9133662139</strong></div>
+        <div><span>Account Name</span><strong>Omopariola Smart Oluwatoyin</strong></div>
+      </div>
+      <a class="btn btn-green" style="width:100%;text-align:center;display:block" id="whatsappBtn" href="#" target="_blank">Send Receipt on WhatsApp</a>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px">Course access is sent once your transfer is confirmed manually.</p>
+    </div>
+
+    <div id="unlockBox" class="unlock-box" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   SET YOUR OWN PAYSTACK PUBLIC KEY HERE
+   Get it free at https://dashboard.paystack.com/#/settings/developer
+   (starts with pk_live_... for real charges, pk_test_... for testing)
+   The SECRET key never goes here — it lives only in netlify/functions/verify.js
+   as an environment variable on Netlify's server.
+   ============================================================ */
+const PAYSTACK_PUBLIC_KEY = "pk_test_e71a7e0041607e654fb690af9b7eda40466e13cc";
+
+/* Display info only — the real unlock URL comes from the server after it
+   verifies the payment with Paystack. Keep this in sync with server.js. */
+const COURSE_META = {
+  literacy:   { name: "Computer & Internet Literacy",      price: 2500 },
+  typing:     { name: "Typing & Productivity Tools",        price: 2500 },
+  python:     { name: "Intro to Coding (Python)",            price: 5000 },
+  video:      { name: "Video Editing (DaVinci Resolve)",     price: 5000 },
+  webdev:     { name: "Web Development (Responsive Design)", price: 10000 },
+  itsupport:  { name: "IT Support & Troubleshooting",        price: 10000 },
+  design:     { name: "Graphic Design (Canva)",              price: 7000 },
+  marketing:  { name: "Digital Marketing & Freelancing",     price: 15000 }
+};
+const COURSE_LINKS = COURSE_META; // display-only alias used elsewhere on the page
+
+let selectedCourse = null;
+
+document.querySelectorAll(".course-row").forEach(row => {
+  row.style.cursor = "pointer";
+  row.addEventListener("click", () => openModal(row.dataset.course));
+});
+
+function openModal(courseId){
+  selectedCourse = courseId;
+  const c = COURSE_LINKS[courseId];
+  document.getElementById("modalCourseName").textContent = "Enroll — " + c.name;
+  document.getElementById("modalPrice").textContent = "₦" + c.price.toLocaleString();
+  document.getElementById("unlockBox").style.display = "none";
+  document.getElementById("payModal").classList.add("open");
+
+  // If already unlocked on this device, show link immediately
+  const cachedUrl = localStorage.getItem("unlocked_" + courseId);
+  if (cachedUrl) {
+    showUnlock(courseId, cachedUrl, c.name);
+  }
+}
+function closeModal(){ document.getElementById("payModal").classList.remove("open"); }
+
+function showMethod(method){
+  document.getElementById("btnCard").classList.toggle("active", method === "card");
+  document.getElementById("btnBank").classList.toggle("active", method === "bank");
+  document.getElementById("cardPane").style.display = method === "card" ? "block" : "none";
+  document.getElementById("bankPane").style.display = method === "bank" ? "block" : "none";
+  if (method === "bank") {
+    const c = COURSE_LINKS[selectedCourse];
+    const msg = encodeURIComponent(
+      `Hi, I just transferred ₦${c.price.toLocaleString()} to Opay 9133662139 for the "${c.name}" course. Name: ${document.getElementById("payName").value || "___"}. Please confirm my access.`
+    );
+    document.getElementById("whatsappBtn").href = "https://wa.me/2348063543861?text=" + msg;
+  }
+}
+
+function payWithPaystack(){
+  const email = document.getElementById("payEmail").value.trim();
+  const name = document.getElementById("payName").value.trim();
+  const c = COURSE_LINKS[selectedCourse];
+
+  if (!email || !name) { alert("Please enter your name and email first."); return; }
+  if (PAYSTACK_PUBLIC_KEY.includes("REPLACE")) {
+    alert("Site owner: add your real Paystack public key in the code before going live.");
+    return;
+  }
+
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: email,
+    amount: c.price * 100, // Paystack expects kobo
+    currency: "NGN",
+    metadata: { course: c.name, student_name: name },
+    callback: function(response){
+      // Paystack has charged the card. Now ask OUR server to double-check
+      // this exact reference with Paystack before handing out the real link —
+      // this is the step that makes the unlock tamper-proof.
+      verifyOnServer(response.reference, selectedCourse);
+    },
+    onClose: function(){}
+  });
+  handler.openIframe();
+}
+
+async function verifyOnServer(reference, courseId){
+  const box = document.getElementById("unlockBox");
+  box.style.display = "block";
+  box.innerHTML = "Confirming your payment…";
+  try {
+    const res = await fetch("/.netlify/functions/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ reference, course: courseId })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      localStorage.setItem("unlocked_" + courseId, data.url);
+      showUnlock(courseId, data.url, data.name);
+    } else {
+      box.innerHTML = "We couldn't verify that payment (" + (data.error || "unknown error") +
+        "). If you were charged, please message the CEO on WhatsApp with your reference: " + reference;
+    }
+  } catch (err) {
+    box.innerHTML = "Payment succeeded but we couldn't reach our server to confirm it. " +
+      "Please message the CEO on WhatsApp with your reference: " + reference;
+  }
+}
+
+function showUnlock(courseId, url, name){
+  const c = COURSE_LINKS[courseId];
+  const box = document.getElementById("unlockBox");
+  box.style.display = "block";
+  box.innerHTML = `Payment confirmed! Your course: <a href="${url}" target="_blank" rel="noopener">Start "${name || c.name}" here</a>. We've also noted your enrollment — you'll get your certificate once you complete the program.`;
+}
+</script>
+</body>
+</html>
